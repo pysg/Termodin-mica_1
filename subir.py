@@ -7,4 +7,4 @@ T = a + b
 
 G = np.exp(T)
 
-prtin "T"
+print "T"
