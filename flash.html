@@ -1,0 +1,424 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>3. Cálculo del flash Isotermico (T, P) &mdash; IPyTherm 0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="IPyTherm 0 documentation" href="index.html"/>
+        <link rel="next" title="4. Estabilidad Material de las Fases" href="Estabilidad.html"/>
+        <link rel="prev" title="2. Función de la Energía de Helmhotlz-Fugacidad" href="Hmz.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+
+        
+          <a href="index.html" class="icon icon-home"> IPyTherm
+        
+
+        
+        </a>
+
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Jupyther_1.html">Contexto IPython</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Jupyther_1.html#introduccion">1. Introducción.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Jupyther_1.html#objetivo-general">1.1. Objetivo General.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Jupyther_1.html#alcance">1.2. Alcance.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Jupyther_1.html#referencias">2. Referencias.</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Hmz.html">2. Función de la Energía de Helmhotlz-Fugacidad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hmz.html#implementacion-basica">2.1 Implementación básica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hmz.html#resultados">2.2 Resultados</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hmz.html#conclusiones">2.3 Conclusiones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hmz.html#referencias">2.4 Referencias</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">3. Cálculo del flash Isotermico (T, P)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#modelo">3.1 Modelo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#algoritmo">3.2 Algoritmo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#resultados">3.3 Resultados</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#conclusiones">3.4 Conclusiones</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#referencias">3.5 Referencias</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Estabilidad.html">4. Estabilidad Material de las Fases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Envolvente.html">5. Envolvente de Fases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Avanzar.html">6. Siguientes Temas...</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Repositorio.html">7. Repositorio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">8. Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Equipo.html">9. Equipo Desarrollador</a></li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">IPyTherm</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>3. Cálculo del flash Isotermico (T, P)</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/flash.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="calculo-del-flash-isotermico-t-p">
+<h1>3. Cálculo del flash Isotermico (T, P)<a class="headerlink" href="#calculo-del-flash-isotermico-t-p" title="Permalink to this headline">¶</a></h1>
+<p>En este documento se presenta el desarrollo básico del comportamiento termodinámico del equilibrio de fases, iniciando con el calculo del flash isotermico bifasico utilizando las ecuaciones de estado como <strong>Soave-Redlich-Kwong (SRK)</strong> <a class="footnote-reference" href="#id5" id="id1">[1]</a> y <strong>Peng-Robinsong (PR)</strong> <a class="footnote-reference" href="#id5" id="id2">[1]</a> junto con las reglas de mezclado de <strong>Van Der Waalls</strong> <a class="footnote-reference" href="#id5" id="id3">[1]</a>.</p>
+<p>El cálculo del flash isotermico bifasico es un cálculo básico en la introducción de los procesos de separación porque es
+el esqeuma tecnologíco de separación más simple, el que se ingresa una corriente de fluido a un &#8220;tanque&#8221; calentado por un flujo de calor en el que se obtiene una corriente de salida por cada fase presente en el sistema. En el caso bifasico, una corriente de líquido y otra de vapor.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">En este capítulo se utiliza el enfoque de sustitución sucesiva para resolver la ecuación de Rachford-Rice <a class="footnote-reference" href="#id6" id="id4">[2]</a>, mientras que en capítulo 3 se presenta el enfoque simultaneo al resolver el sistema de ecuaciones por medio del método de Newton multivariado.</p>
+</div>
+<div class="section" id="modelo">
+<h2>3.1 Modelo<a class="headerlink" href="#modelo" title="Permalink to this headline">¶</a></h2>
+<p>El modelo del flash isotermico bifasico, corresponde al balance de materia global y por componente en el tanque separador
+que se muestra en la figura (1), junto con la condición de equilibrio de fases líquido-vapor.</p>
+<p>Coeficiente de distribución <img class="math" src="_images/math/4268459ea3178827ee706b1f82bfd62764c8dd45.png" alt="K_i"/></p>
+<div class="math">
+<p><span class="eqno">(1)</span><img src="_images/math/50ff85ad82771e7ea31a76bce451f0951550e53c.png" alt="Ki = \frac {yi} {xi}"/></p>
+</div><div class="math">
+<p><span class="eqno">(2)</span><img src="_images/math/0b08af614349905dd31892cbf92d7a50fbb91cdb.png" alt="g(\beta) = \sum \limits_{i=1}^{C} (y_i - x_i)"/></p>
+</div><div class="math">
+<p><span class="eqno">(3)</span><img src="_images/math/89365ef9cbe3846b9bc56110d551f21f95e26ef0.png" alt="g(\beta) = \sum \limits_{i=1}^{C} \frac {K_i - 1} {1 - \beta + \beta K_i}"/></p>
+</div><div class="math">
+<p><span class="eqno">(4)</span><img src="_images/math/558181cf6f89feddfe08e88e2f70855ddfea3e99.png" alt="dg^(\beta) = \sum \limits_{i=1}^{C} z_i \frac {(K_i - 1)^2} {(1 - \beta + \beta K_i)^2} &lt; 0"/></p>
+</div><div class="math">
+<p><span class="eqno">(5)</span><img src="_images/math/bad0350a7566be2ad03b0399125b7858120657e4.png" alt="g(0) = \sum \limits_{i=1}^{C} (z_i K_i - 1) &gt; 0"/></p>
+</div><div class="math">
+<p><span class="eqno">(6)</span><img src="_images/math/b2c02166c5202dff05a9cfe8241dd4b266a363af.png" alt="g(1) = \sum \limits_{i=1}^{C} (1 - \frac {z_i} {K_i}) &lt; 0"/></p>
+</div><div class="math">
+<p><span class="eqno">(7)</span><img src="_images/math/456bdfd857543624ba2fb99a8c750f943cb15719.png" alt="y_i \frac{K_i z_i} {1 - \beta + \beta K_i}"/></p>
+</div><div class="math">
+<p><span class="eqno">(8)</span><img src="_images/math/c009756db76554bd80aabbcd0851c0187321ff7a.png" alt="x_i = \frac{z_i} {1 - \beta + \beta K_i}"/></p>
+</div><p>Aproximación de wilson para el coeficiente de distribución <img class="math" src="_images/math/4268459ea3178827ee706b1f82bfd62764c8dd45.png" alt="K_i"/></p>
+<div class="math">
+<p><span class="eqno">(9)</span><img src="_images/math/9d2f30de835c620714118dc13ca7b4373f9dfe5b.png" alt="lnK_i = ln \left(\frac {Pc_i} {P}\right ) + 5.373(1 + w_i)(1 - \frac {Tc_i} {T})"/></p>
+</div><div class="math">
+<p><span class="eqno">(10)</span><img src="_images/math/a4b36f5875cdebaaed8fc330c2030932306b0104.png" alt="1 - \beta + \beta K_i &gt;= K_i z_i"/></p>
+</div><div class="math">
+<p><span class="eqno">(11)</span><img src="_images/math/e725b92d7ba5950b131f24c5ba857dacfb42e7d9.png" alt="\beta &gt;= \frac {K-i z_i - 1} {K_i - 1}"/></p>
+</div><div class="math">
+<p><span class="eqno">(12)</span><img src="_images/math/5c90beb02f23c8b9206673f893c5aff996a310a8.png" alt="1 - \beta + \beta K_i &gt;= z_i"/></p>
+</div><div class="math">
+<p><span class="eqno">(13)</span><img src="_images/math/6dced751284a3599ddfdda5cf5b4cef077852f69.png" alt="\beta &lt;= \frac {z_i - 1} {1 - K_i}"/></p>
+</div><p>Valores extremos de la fracción de vapor en el sistema <img class="math" src="_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/></p>
+<div class="math">
+<p><span class="eqno">(14)</span><img src="_images/math/82a2ae35eae3e5c17d6dcdd175cdafd2faa14e4d.png" alt="\beta_{min} = 0"/></p>
+</div><div class="math">
+<p><span class="eqno">(15)</span><img src="_images/math/edd0e4c20ce2a6ed724ab949fef2987fb047aa3d.png" alt="\beta_{max} = 1"/></p>
+</div><p>El incumplmiento de las condicones (13) y (14) corresponden a un líquido subenfriado <img class="math" src="_images/math/36b8b16149454a2a5e66f9369eb973b05ff89c57.png" alt="\beta = 0"/> y un vapor sobrecalentado <img class="math" src="_images/math/62d80c06c441f97f096c5a6b5f48e6714cb071df.png" alt="\beta = 1"/></p>
+<p>Determinar el valor de Beta minimo y máximo. Luego estimar el promedio de estos Beta para usarlo como valor inciial
+A continuación se muestran los resultados del del calculo del flash isotermico para una serie de presiones y composiciones:</p>
+</div>
+<div class="section" id="algoritmo">
+<h2>3.2 Algoritmo<a class="headerlink" href="#algoritmo" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Especificar la Presión <strong>P</strong>, Temperatura <strong>T</strong> y número de moles <strong>N</strong> del sistema</li>
+<li>Especificar los componentes de la mezcla</li>
+<li>Calcular el coeficiente de distribución <strong>Ki</strong> a partir de la relación de Wilson</li>
+<li>Calcular el valor de <strong>Beta minimo</strong></li>
+<li>Calcular el valor de <strong>Beta máximo</strong></li>
+<li>Calcular el promedio de beta, usando Beta minimo y Beta máximo</li>
+<li>Resolver la ecuación de <strong>Rachford-Rice</strong>, para calcular Beta con una tolerancia de <em>1e-6</em></li>
+<li>Calcular las fracciones molares del líquido <strong>xi</strong> y del vapor <strong>yi</strong></li>
+<li>Calcular los coeficientes de fugacidad para las fracciones molares del líquido <strong>xi</strong> y del vapor <strong>yi</strong></li>
+<li>Calcular el coeficiente de distribución <strong>Ki</strong> a partir de los coeficientes de fugacidad del componente i en la mezcla de la fase vapor y líquido</li>
+<li>Verificar la convergencia del sistema con una tolerancia de 1e-6 para deltaKi</li>
+<li>Calcular la funcion de la energía de Helmholtz F</li>
+<li>calcular el coeficiente de fugacidad del compoenete i en la mezcla de la fase líquida y fase vapor.</li>
+</ul>
+<p>A continuación se muestra un esquema del algoritmo implementado para el calculo del flash isotermico bifasico:</p>
+<p>De esta forma el código es de la siguiente forma:</p>
+<div class="highlight-python"><div class="highlight"><pre>import numpy as np
+A = np.ones(3)
+class Helmhotlz():
+</pre></div>
+</div>
+</div>
+<div class="section" id="resultados">
+<h2>3.3 Resultados<a class="headerlink" href="#resultados" title="Permalink to this headline">¶</a></h2>
+<p>A continuación se muestran los resultados numéricos del calculo del flash isotermico bifasico
+para una mezcla de los componentes C2-C3-C4. En la tabla 1, se muestra las especificaciones de
+la presión P, temperatura T y flujo F junto con las fracciones molares del líquido, del vapor
+y la fracción de fase resultanten usando como modelo termodinámico la ecuación de estado
+<em>Peng-robinson (PR)</em> y las reglas de mezclado de <strong>Van Der Waalls</strong>.</p>
+<p>Tabla.1 flash isotermico Ki(T, P) Mezcla ideal</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="4%" />
+<col width="20%" />
+<col width="15%" />
+<col width="9%" />
+<col width="26%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td colspan="2">Presión Bar</td>
+<td colspan="2">Temperatura K</td>
+<td colspan="2">Flujo F mol/h</td>
+</tr>
+<tr class="row-even"><td colspan="2">8</td>
+<td colspan="2">320</td>
+<td colspan="2">1</td>
+</tr>
+<tr class="row-odd"><td colspan="6">&nbsp;</td>
+</tr>
+<tr class="row-even"><td>Componente</td>
+<td colspan="2">Ingresa zi</td>
+<td colspan="2">líquido xi</td>
+<td>Vapor yi</td>
+</tr>
+<tr class="row-odd"><td>C3</td>
+<td colspan="2">0.23</td>
+<td colspan="2">0.18357118</td>
+<td>0.37209837</td>
+</tr>
+<tr class="row-even"><td>i-C4</td>
+<td colspan="2">0.67</td>
+<td colspan="2">0.70479988</td>
+<td>0.56349276</td>
+</tr>
+<tr class="row-odd"><td>n-C4</td>
+<td colspan="2">0.10</td>
+<td colspan="2">0.11162895</td>
+<td>0.06440887</td>
+</tr>
+<tr class="row-even"><td>g</td>
+<td colspan="5">6.1017797856749434e-07</td>
+</tr>
+<tr class="row-odd"><td>dg</td>
+<td colspan="5">-0.20663315922997191</td>
+</tr>
+<tr class="row-even"><td>Beta</td>
+<td colspan="5">0.24627123315157093</td>
+</tr>
+</tbody>
+</table>
+<p>Tabla.2 Flash isotermico Ki(T, P, nil, niv) <strong>(PR)</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="4%" />
+<col width="20%" />
+<col width="15%" />
+<col width="9%" />
+<col width="26%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td colspan="2">Presión Bar</td>
+<td colspan="2">Temperatura K</td>
+<td colspan="2">Flujo F mol/h</td>
+</tr>
+<tr class="row-even"><td colspan="2">8</td>
+<td colspan="2">320</td>
+<td colspan="2">1</td>
+</tr>
+<tr class="row-odd"><td colspan="6">&nbsp;</td>
+</tr>
+<tr class="row-even"><td>Componente</td>
+<td colspan="2">Ingresa zi</td>
+<td colspan="2">líquido xi</td>
+<td>Vapor yi</td>
+</tr>
+<tr class="row-odd"><td>C3</td>
+<td colspan="2">0.23</td>
+<td colspan="2">0.20070242</td>
+<td>0.35071046</td>
+</tr>
+<tr class="row-even"><td>i-C4</td>
+<td colspan="2">0.67</td>
+<td colspan="2">0.69183981</td>
+<td>0.5800167</td>
+</tr>
+<tr class="row-odd"><td>n-C4</td>
+<td colspan="2">0.10</td>
+<td colspan="2">0.10745949</td>
+<td>0.06926579</td>
+</tr>
+<tr class="row-even"><td>g</td>
+<td colspan="5">-9.7482523918959729e-06</td>
+</tr>
+<tr class="row-odd"><td>dg</td>
+<td colspan="5">-0.13108663002971882</td>
+</tr>
+<tr class="row-even"><td>Beta</td>
+<td colspan="5">0.19530673657</td>
+</tr>
+</tbody>
+</table>
+<p>De esta forma, se observa que el algoritmo empleando la ecuación de estado <strong>Peng-Robinson (PR)</strong> converge en a una solución <em>cercana</em> de la solución que utiliza la aproximación de wilson para el coeficiente de distribución <strong>Ki</strong>, mostrando ser efieciente para casos simples como el presente en este capítulo.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ol class="last arabic simple">
+<li>Se require desarrollar ejemplos para más modelos termodinámicos. Implementados en el modulo de Fugacidad.</li>
+<li>Se requiere implementar más algoritmos de cálculo enfocados en el flash.</li>
+<li>Se requiere implementar más posibilidades del calculo de flash: Multifase, Volumen constante, Adiabatico, entre otros.</li>
+</ol>
+</div>
+</div>
+<div class="section" id="conclusiones">
+<h2>3.4 Conclusiones<a class="headerlink" href="#conclusiones" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Se implemento en el lenguaje de programación Python 3.x los algoritmos para el calculo de la fugacidad para un componente puro y una mezcla multicomponente siguiendo el enfoque modular de Mollerup-Michelsen para la energía libre de Helmhotlz F usando una ecuación de estado y el calculo del flash isotermico (T, P) multicomponente bifasico.</li>
+<li>La documentación del trabajo se realizó usando el formato <strong>reStructuredtext</strong> y la librería <strong>Sphinx</strong>, el cual permite combinar eficientemente en un texto plano, código <strong>latex</strong>, código de programación en este caso <strong>Python</strong>, imagenes entre otros, para facilitar el proceso de documentación de un desarrollo de software.</li>
+</ol>
+</div>
+<div class="section" id="referencias">
+<h2>3.5 Referencias<a class="headerlink" href="#referencias" title="Permalink to this headline">¶</a></h2>
+<table class="docutils footnote" frame="void" id="id5" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>Curso de especialización en Termodinámica de fluidos para la industria Petrolera. Ph.D Martín Cismondí. Mayo (2015)</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id6" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td>Introductory Chemical engineering thermodynamics. J. Richard Elliott , Carl T. Lira. Prentice Hall (2012)</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Estabilidad.html" class="btn btn-neutral float-right" title="4. Estabilidad Material de las Fases" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Hmz.html" class="btn btn-neutral" title="2. Función de la Energía de Helmhotlz-Fugacidad" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Andrés.
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
